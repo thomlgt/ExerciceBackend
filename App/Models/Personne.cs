@@ -23,6 +23,10 @@ namespace App.Models
             Age = age;
         }
 
+        /// <summary>
+        /// Méthode permettant de transformer une Personne(Models) en une Personne(DTO) de manière implicite
+        /// </summary>
+        /// <param name="p"></param>
         public static implicit operator PersonneDTO(Personne p)
         {
             return new PersonneDTO(

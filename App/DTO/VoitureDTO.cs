@@ -25,6 +25,10 @@ namespace App.DTO
             Proprietaire = proprietaire;
         }
 
+        /// <summary>
+        /// Méthode permettant de transformer une Voiture(DTO) en Voiture(Models) de manière implicite
+        /// </summary>
+        /// <param name="v"></param>
         public static implicit operator Voiture(VoitureDTO v)
         {
             return new Voiture(
