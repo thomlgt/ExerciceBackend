@@ -30,6 +30,8 @@ namespace App
         {
             services.AddSingleton<IPersonneService, PersonneService>();
             services.AddSingleton<IPersonneRepository, PersonneRepository>();
+            services.AddSingleton<IVoitureRepository, VoitureRepository>();
+            services.AddSingleton<IVoitureService, VoitureService>();
             services.AddControllers();
         }
 
