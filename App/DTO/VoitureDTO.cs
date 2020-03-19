@@ -9,21 +9,24 @@ namespace App.DTO
     public class VoitureDTO
     {
         public int Id { get; set; }
-        public string Nom { get; set; }
         public string Marque { get; set; }
+        public string Nom { get; set; }
         public string Immatriculation { get; set; }
-        public PersonneDTO Proprietaire { get; set; }
+        public int PersonneId { get; set; }
 
         public VoitureDTO() { }
 
-        public VoitureDTO(int id, string nom, string marque, string immatriculation, PersonneDTO proprietaire)
+        public VoitureDTO(int id, string marque, string nom, string immatriculation, int personneId, PersonneDTO personne)
         {
             Id = id;
-            Nom = nom;
             Marque = marque;
+            Nom = nom;
             Immatriculation = immatriculation;
-            Proprietaire = proprietaire;
+            PersonneId = personneId;
+            Personne = personne;
         }
+
+        public virtual PersonneDTO Personne { get; set; }
 
         /// <summary>
         /// Méthode permettant de transformer une Voiture(DTO) en Voiture(Models) de manière implicite
@@ -36,7 +39,8 @@ namespace App.DTO
                 v.Nom,
                 v.Marque,
                 v.Immatriculation,
-                v.Proprietaire
+                v.PersonneId,
+                v.Personne
                 );
         }
     }

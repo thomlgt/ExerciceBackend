@@ -1,42 +1,40 @@
 ﻿using App.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace App.Models
 {
-    public class Voiture
+    public partial class Voiture
     {
         public int Id { get; set; }
-        public string Nom { get; set; }
         public string Marque { get; set; }
+        public string Nom { get; set; }
         public string Immatriculation { get; set; }
-        public Personne Proprietaire { get; set; }
+        public int PersonneId { get; set; }
 
         public Voiture() { }
 
-        public Voiture(int id, string nom, string marque, string immatriculation, Personne proprietaire)
+        public Voiture(int id, string marque, string nom, string immatriculation, int personneId, Personne personne)
         {
             Id = id;
-            Nom = nom;
             Marque = marque;
+            Nom = nom;
             Immatriculation = immatriculation;
-            Proprietaire = proprietaire;
+            PersonneId = personneId;
+            Personne = personne;
         }
 
-        /// <summary>
-        /// Méthode permettant de transformer une Voiture(Models) en Voiture(DTO) de manière implicite
-        /// </summary>
-        /// <param name="v"></param>
+        public virtual Personne Personne { get; set; }
+
         public static implicit operator VoitureDTO(Voiture v)
         {
             return new VoitureDTO(
                 v.Id,
-                v.Nom,
                 v.Marque,
+                v.Nom,
                 v.Immatriculation,
-                v.Proprietaire
+                v.PersonneId,
+                v.Personne
                 );
         }
     }
