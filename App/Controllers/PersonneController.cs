@@ -12,13 +12,13 @@ namespace App.Controllers
     [ApiController]
     public class PersonneController : ControllerBase
     {
-        public static List<Personne> personnes = new List<Personne>();
+        public static List<PersonneDTO> personnes = new List<PersonneDTO>();
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Personne> FindAll()
+        public IEnumerable<PersonneDTO> FindAll()
         {
-            List<Personne> result = new List<Personne>();
+            List<PersonneDTO> result = new List<PersonneDTO>();
             foreach(var personne in personnes)
             {
                 if(personne != null)
@@ -31,9 +31,53 @@ namespace App.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public Personne FindById(int id)
+        public PersonneDTO FindById(int id)
         {
             return personnes[id];
+        }
+
+        [HttpGet]
+        [Route("nom/{nom}")]
+        public IEnumerable<PersonneDTO> FindByNom(string nom)
+        {
+            return personnes.Where(p => p.Nom == nom);
+        }
+
+        [HttpGet]
+        [Route("prenom/{prenom}")]
+        public IEnumerable<PersonneDTO> FindByPrenom(string prenom)
+        {
+            return personnes.Where(p => p.Prenom == prenom);
+        }
+
+        [HttpGet]
+        [Route("age/{age}")]
+        public IEnumerable<PersonneDTO> FindByAge(int age)
+        {
+            return personnes.Where(p => p.Age == age);
+        }
+
+        [HttpGet]
+        [Route("age")]
+        public IEnumerable<PersonneDTO> FindByAge(int min, int max)
+        {
+            return personnes.Where(p => (p.Age >= min && p.Age <= max) );
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public void Delete(int id)
+        {
+            personnes[id] = null;
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public PersonneDTO Update(int id, [FromBody] PersonneDTO personne)
+        {
+            personne.Id = id;
+            personnes[id] = personne;
+            return personne;
         }
     }
 }
