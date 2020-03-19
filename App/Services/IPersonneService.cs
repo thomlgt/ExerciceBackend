@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace App.Services
 {
-    interface IPersonneService
+    public interface IPersonneService
     {
-        //Trouver
-        public IEnumerable<PersonneDTO> TrouverTousPersonnes();
+        //------TROUVER------
+        public IEnumerable<PersonneDTO> TrouverTout();
         public PersonneDTO TrouverParId(int id);
         public IEnumerable<PersonneDTO> TrouverParNom(string nom);
         public IEnumerable<PersonneDTO> TrouverParPrenom(string prenom);
         public IEnumerable<PersonneDTO> TrouverParAge(int age);
         public IEnumerable<PersonneDTO> TrouverParAge(int min, int max);
-        //Ajouter
+        //------AJOUTER------
         public PersonneDTO AjouterUnePersonne(PersonneDTO personne);
-        //Supprimer
+        //------SUPPRIMER------
         public void SupprimerPersonne(int id);
-        //Modifier
+        //------MODIFIER------
         public PersonneDTO ModifierPersonne(int id, PersonneDTO personne);
     }
 }

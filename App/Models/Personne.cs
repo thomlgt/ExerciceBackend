@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,16 @@ namespace App.Models
             Nom = nom;
             Prenom = prenom;
             Age = age;
+        }
+
+        public static implicit operator PersonneDTO(Personne p)
+        {
+            return new PersonneDTO(
+                p.Id,
+                p.Nom,
+                p.Prenom,
+                p.Age
+                );
         }
     }
 }

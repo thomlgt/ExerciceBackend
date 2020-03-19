@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Repositories;
+using App.Repositories.Impl;
+using App.Services;
+using App.Services.Impl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +28,8 @@ namespace App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IPersonneService, PersonneService>();
+            services.AddSingleton<IPersonneRepository, PersonneRepository>();
             services.AddControllers();
         }
 
