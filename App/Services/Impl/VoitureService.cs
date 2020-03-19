@@ -10,15 +10,23 @@ namespace App.Services.Impl
     public class VoitureService : IVoitureService
     {
         private IVoitureRepository repository;
+        private IPersonneRepository personneRepository;
 
-        public VoitureService(IVoitureRepository repository)
+        public VoitureService(IVoitureRepository repository, IPersonneRepository personneRepository)
         {
             this.repository = repository;
+            this.personneRepository = personneRepository;
         }
 
         public VoitureDTO AjouterUneVoiture(VoitureDTO voiture)
         {
-            return this.repository.Save(voiture);
+            VoitureDTO result = null;
+            voiture.Proprietaire = this.personneRepository.FindById(voiture.Proprietaire.Id);
+            if(voiture.Proprietaire.Age >= 18)
+            {
+                result = this.repository.Save(voiture);
+            }
+            return result;
         }
 
         public VoitureDTO ModifierVoiture(int id, VoitureDTO voiture)

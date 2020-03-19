@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
 {
-    [Route("api/voiture")]
+    [Route("api/voitures")]
     [ApiController]
     public class VoitureController : ControllerBase
     {

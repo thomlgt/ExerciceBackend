@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
 {
-    [Route("api/personne")]
+    [Route("api/personnes")]
     [ApiController]
     public class PersonneController : ControllerBase
     {
