@@ -1,4 +1,5 @@
 ﻿using App.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,63 +9,85 @@ namespace App.Repositories.Impl
 {
     public class VoitureRepository : IVoitureRepository
     {
-        private static List<Voiture> voitures = new List<Voiture>();
+        private appContext context;
+
+        public VoitureRepository(appContext context)
+        {
+            this.context = context;
+        }
 
         public void Delete(int id)
         {
-            voitures[id] = null;
+            Voiture voiture = context.Voiture.Find(id);
+            context.Voiture.Remove(voiture);
         }
 
         public IEnumerable<Voiture> FindAll()
         {
-            List<Voiture> result = new List<Voiture>();
-            foreach(Voiture voiture in voitures)
-            {
-                if(voiture != null)
-                {
-                    result.Add(voiture);
-                }
-            }
-            return result;
+            return context.Voiture;
         }
 
         public Voiture FindById(int id)
         {
-            return voitures[id];
+            return context.Voiture.Find(id);
         }
 
         public IEnumerable<Voiture> FindByImmatriculation(string immatriculation)
         {
-            return voitures.Where(v => v.Immatriculation == immatriculation);
+            return context.Voiture.Where(v => v.Immatriculation == immatriculation);
         }
 
         public IEnumerable<Voiture> FindByMarque(string marque)
         {
-            return voitures.Where(v => v.Marque == marque);
+            return context.Voiture.Where(v => v.Marque == marque);
         }
 
         public IEnumerable<Voiture> FindByNom(string nom)
         {
-            return voitures.Where(v => v.Nom == nom);
+            return context.Voiture.Where(v => v.Nom == nom);
         }
 
         public IEnumerable<Voiture> FindByProprietaireId(int id)
         {
-            return voitures.Where(v => v.PersonneId == id);
+            return context.Voiture.Where(v => v.PersonneId == id);
         }
 
         public Voiture Save(Voiture voiture)
         {
-            voiture.Id = voitures.Count();
-            voitures.Add(voiture);
+            context.Voiture.Add(voiture);
             return voiture;
         }
 
         public Voiture Update(int id, Voiture voiture)
         {
             voiture.Id = id;
-            voitures[id] = voiture;
+            context.Entry(voiture).State = EntityState.Modified;
             return voiture;
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

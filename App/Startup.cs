@@ -28,10 +28,11 @@ namespace App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IPersonneService, PersonneService>();
+            services.AddSingleton<IPersonneService, PersonneService>();
             services.AddTransient<IPersonneRepository, PersonneRepository>();
             services.AddTransient<IVoitureRepository, VoitureRepository>();
-            services.AddTransient<IVoitureService, VoitureService>();
+            services.AddSingleton<IVoitureService, VoitureService>();
+            services.AddTransient<appContext, appContext>();
             services.AddControllers();
         }
 

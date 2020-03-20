@@ -12,6 +12,7 @@ namespace App.DTO
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public int? Age { get; set; }
+        public virtual ICollection<VoitureDTO> Voiture { get; set; }
 
         public PersonneDTO() { }
 
@@ -24,24 +25,22 @@ namespace App.DTO
             Voiture = voiture;
         }
 
-        public virtual ICollection<VoitureDTO> Voiture { get; set; }
-
         /// <summary>
         /// Méthode permettant de transformer une Personne(DTO) en Personne(Models) de manière implicite
         /// </summary>
         /// <param name="p"></param>
         public static implicit operator Personne(PersonneDTO p)
         {
-            ICollection<Voiture> voitures = new List<Voiture>();
+            ICollection<Voiture> voitures = null;
 
-            if(p.Voiture != null)
+            if (p.Voiture != null)
             {
                 foreach (Voiture v in p.Voiture)
                 {
                     voitures.Add(v);
                 }
             }
-            
+
             return new Personne(
                 p.Id,
                 p.Nom,

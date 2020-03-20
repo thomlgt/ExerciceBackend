@@ -10,18 +10,18 @@ namespace App.Services.Impl
     public class VoitureService : IVoitureService
     {
         private IVoitureRepository repository;
-        private IPersonneRepository personneRepository;
+        private IPersonneService personneService;
 
-        public VoitureService(IVoitureRepository repository, IPersonneRepository personneRepository)
+        public VoitureService(IVoitureRepository repository, IPersonneService personneService)
         {
             this.repository = repository;
-            this.personneRepository = personneRepository;
+            this.personneService = personneService;
         }
 
         public VoitureDTO AjouterUneVoiture(VoitureDTO voiture)
         {
             VoitureDTO result = null;
-            voiture.Personne = this.personneRepository.FindById(voiture.PersonneId);
+            voiture.Personne = this.personneService.TrouverParId(voiture.PersonneId);
             if(voiture.Personne.Age >= 18)
             {
                 result = this.repository.Save(voiture);

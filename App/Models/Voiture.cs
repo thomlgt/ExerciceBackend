@@ -11,6 +11,7 @@ namespace App.Models
         public string Nom { get; set; }
         public string Immatriculation { get; set; }
         public int PersonneId { get; set; }
+        public virtual Personne Personne { get; set; }
 
         public Voiture() { }
 
@@ -23,8 +24,6 @@ namespace App.Models
             PersonneId = personneId;
             Personne = personne;
         }
-
-        public virtual Personne Personne { get; set; }
 
         public static implicit operator VoitureDTO(Voiture v)
         {

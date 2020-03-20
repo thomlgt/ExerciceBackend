@@ -13,6 +13,7 @@ namespace App.DTO
         public string Nom { get; set; }
         public string Immatriculation { get; set; }
         public int PersonneId { get; set; }
+        public virtual PersonneDTO Personne { get; set; }
 
         public VoitureDTO() { }
 
@@ -25,8 +26,6 @@ namespace App.DTO
             PersonneId = personneId;
             Personne = personne;
         }
-
-        public virtual PersonneDTO Personne { get; set; }
 
         /// <summary>
         /// Méthode permettant de transformer une Voiture(DTO) en Voiture(Models) de manière implicite
