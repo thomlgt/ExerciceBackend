@@ -31,6 +31,8 @@ namespace App.DTO
         /// <param name="p"></param>
         public static implicit operator Personne(PersonneDTO p)
         {
+            if (p == null) return null;
+
             ICollection<Voiture> voitures = null;
 
             if (p.Voiture != null)

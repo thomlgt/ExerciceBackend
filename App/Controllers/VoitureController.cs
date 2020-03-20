@@ -71,7 +71,7 @@ namespace App.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("")]
         public IActionResult Update([FromBody] VoitureDTO voiture)
         {
             return Ok(this.service.ModifierVoiture(voiture));

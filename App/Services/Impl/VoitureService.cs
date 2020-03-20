@@ -21,11 +21,14 @@ namespace App.Services.Impl
         public VoitureDTO AjouterUneVoiture(VoitureDTO voiture)
         {
             VoitureDTO result = null;
+
             voiture.Personne = this.personneService.TrouverParId(voiture.PersonneId);
+
             if (voiture.Personne.Age >= 18)
             {
                 result = this.repository.Save(voiture);
             }
+
             return result;
         }
 

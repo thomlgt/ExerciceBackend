@@ -55,6 +55,7 @@ namespace App.Repositories.Impl
 
         public Voiture Save(Voiture voiture)
         {
+            voiture.Personne = null;
             context.Voiture.Add(voiture);
             Save();
             return voiture;
