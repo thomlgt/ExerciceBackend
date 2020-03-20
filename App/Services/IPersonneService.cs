@@ -69,6 +69,6 @@ namespace App.Services
         /// <param name="id"></param>
         /// <param name="personne"></param>
         /// <returns></returns>
-        public PersonneDTO ModifierPersonne(int id, PersonneDTO personne);
+        public PersonneDTO ModifierPersonne(PersonneDTO personne);
     }
 }

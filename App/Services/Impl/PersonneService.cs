@@ -21,9 +21,9 @@ namespace App.Services.Impl
             return this.repository.Save(personne);
         }
 
-        public PersonneDTO ModifierPersonne(int id, PersonneDTO personne)
+        public PersonneDTO ModifierPersonne(PersonneDTO personne)
         {
-            return this.repository.Update(id, personne);
+            return this.repository.Update(personne);
         }
 
         public void SupprimerPersonne(int id)

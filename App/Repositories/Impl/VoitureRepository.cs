@@ -20,6 +20,7 @@ namespace App.Repositories.Impl
         {
             Voiture voiture = context.Voiture.Find(id);
             context.Voiture.Remove(voiture);
+            Save();
         }
 
         public IEnumerable<Voiture> FindAll()
@@ -55,13 +56,14 @@ namespace App.Repositories.Impl
         public Voiture Save(Voiture voiture)
         {
             context.Voiture.Add(voiture);
+            Save();
             return voiture;
         }
 
-        public Voiture Update(int id, Voiture voiture)
+        public Voiture Update(Voiture voiture)
         {
-            voiture.Id = id;
             context.Entry(voiture).State = EntityState.Modified;
+            Save();
             return voiture;
         }
 

@@ -22,16 +22,16 @@ namespace App.Services.Impl
         {
             VoitureDTO result = null;
             voiture.Personne = this.personneService.TrouverParId(voiture.PersonneId);
-            if(voiture.Personne.Age >= 18)
+            if (voiture.Personne.Age >= 18)
             {
                 result = this.repository.Save(voiture);
             }
             return result;
         }
 
-        public VoitureDTO ModifierVoiture(int id, VoitureDTO voiture)
+        public VoitureDTO ModifierVoiture(VoitureDTO voiture)
         {
-            return this.repository.Update(id, voiture);
+            return this.repository.Update(voiture);
         }
 
         public void SupprimerVoiture(int id)

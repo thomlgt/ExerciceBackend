@@ -68,6 +68,6 @@ namespace App.Repositories
         /// <param name="id"></param>
         /// <param name="voiture"></param>
         /// <returns></returns>
-        public Voiture Update(int id, Voiture voiture);
+        public Voiture Update(Voiture voiture);
     }
 }

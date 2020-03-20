@@ -69,6 +69,6 @@ namespace App.Repositories
         /// <param name="id"></param>
         /// <param name="personne"></param>
         /// <returns></returns>
-        public Personne Update(int id, Personne personne);
+        public Personne Update(Personne personne);
     }
 }

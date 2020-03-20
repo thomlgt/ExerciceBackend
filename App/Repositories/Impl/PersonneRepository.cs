@@ -20,6 +20,7 @@ namespace App.Repositories.Impl
         {
             Personne personne = context.Personne.Find(id);
             context.Personne.Remove(personne);
+            Save();
         }
 
         public IEnumerable<Personne> FindAll()
@@ -55,14 +56,14 @@ namespace App.Repositories.Impl
         public Personne Save(Personne personne)
         {
             context.Personne.Add(personne);
-            context.SaveChanges();
+            Save();
             return personne;
         }
 
-        public Personne Update(int id, Personne personne)
+        public Personne Update(Personne personne)
         {
-            personne.Id = id;
             context.Entry(personne).State = EntityState.Modified;
+            Save();
             return personne;
         }
 

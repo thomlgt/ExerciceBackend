@@ -22,65 +22,66 @@ namespace App.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<VoitureDTO> FindAll()
+        public IActionResult FindAll()
         {
-            return service.TrouverTout();
+            return Ok(this.service.TrouverTout());
         }
 
         [HttpGet]
         [Route("{id}")]
-        public VoitureDTO FindById(int id)
+        public IActionResult FindById(int id)
         {
-            return service.TrouverParId(id);
+            return Ok(this.service.TrouverParId(id));
         }
 
         [HttpGet]
         [Route("nom/{nom}")]
-        public IEnumerable<VoitureDTO> FindByNom(string nom)
+        public IActionResult FindByNom(string nom)
         {
-            return service.TrouverParNom(nom);
+            return Ok(this.service.TrouverParNom(nom));
         }
 
         [HttpGet]
         [Route("marque/{marque}")]
-        public IEnumerable<VoitureDTO> FindByMarque(string marque)
+        public IActionResult FindByMarque(string marque)
         {
-            return service.TrouverParMarque(marque);
+            return Ok(this.service.TrouverParMarque(marque));
         }
 
         [HttpGet]
         [Route("immatriculation/{immatriculation}")]
-        public IEnumerable<VoitureDTO> FindByImmatriculation(string immatriculation)
+        public IActionResult FindByImmatriculation(string immatriculation)
         {
-            return service.TrouverParImmatriculation(immatriculation);
+            return Ok(this.service.TrouverParImmatriculation(immatriculation));
         }
 
         [HttpGet]
         [Route("proprietaire/{id}")]
-        public IEnumerable<VoitureDTO> FindByProprietaireId(int id)
+        public IActionResult FindByProprietaireId(int id)
         {
-            return service.TrouverParProprietaireId(id);
+            return Ok(this.service.TrouverParProprietaireId(id));
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            service.SupprimerVoiture(id);
+            this.service.SupprimerVoiture(id);
+            return Ok();
         }
 
         [HttpPut]
         [Route("{id}")]
-        public VoitureDTO Update(int id, [FromBody] VoitureDTO voiture)
+        public IActionResult Update([FromBody] VoitureDTO voiture)
         {
-            return service.ModifierVoiture(id, voiture);
+            return Ok(this.service.ModifierVoiture(voiture));
         }
 
         [HttpPost]
         [Route("")]
-        public VoitureDTO Save([FromBody] VoitureDTO voiture)
+        public IActionResult Save([FromBody] VoitureDTO voiture)
         {
-            return service.AjouterUneVoiture(voiture);
+            return Ok(this.service.AjouterUneVoiture(voiture));
         }
     }
 }

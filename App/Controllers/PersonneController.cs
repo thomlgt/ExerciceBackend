@@ -22,65 +22,66 @@ namespace App.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<PersonneDTO> FindAll()
+        public IActionResult FindAll()
         {
-            return service.TrouverTout();
+            return Ok(this.service.TrouverTout());
         }
 
         [HttpGet]
         [Route("{id}")]
-        public PersonneDTO FindById(int id)
+        public IActionResult FindById(int id)
         {
-            return service.TrouverParId(id);
+            return Ok(this.service.TrouverParId(id));
         }
 
         [HttpGet]
         [Route("nom/{nom}")]
-        public IEnumerable<PersonneDTO> FindByNom(string nom)
+        public IActionResult FindByNom(string nom)
         {
-            return service.TrouverParNom(nom);
+            return Ok(this.service.TrouverParNom(nom));
         }
 
         [HttpGet]
         [Route("prenom/{prenom}")]
-        public IEnumerable<PersonneDTO> FindByPrenom(string prenom)
+        public IActionResult FindByPrenom(string prenom)
         {
-            return service.TrouverParPrenom(prenom);
+            return Ok(this.service.TrouverParPrenom(prenom));
         }
 
         [HttpGet]
         [Route("age/{age}")]
-        public IEnumerable<PersonneDTO> FindByAge(int age)
+        public IActionResult FindByAge(int age)
         {
-            return service.TrouverParAge(age);
+            return Ok(this.service.TrouverParAge(age));
         }
 
         [HttpGet]
         [Route("age")]
-        public IEnumerable<PersonneDTO> FindByAge(int min, int max)
+        public IActionResult FindByAge(int min, int max)
         {
-            return service.TrouverParAge(min, max);
+            return Ok(this.service.TrouverParAge(min, max));
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            service.SupprimerPersonne(id);
+            this.service.SupprimerPersonne(id);
+            return Ok();
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public PersonneDTO Update(int id, [FromBody] PersonneDTO personne)
+        [Route("")]
+        public IActionResult Update([FromBody] PersonneDTO personne)
         {
-            return service.ModifierPersonne(id, personne);
+            return Ok(this.service.ModifierPersonne(personne));
         }
 
         [HttpPost]
         [Route("")]
-        public PersonneDTO Save([FromBody] PersonneDTO personne)
+        public IActionResult Save([FromBody] PersonneDTO personne)
         {
-            return service.AjouterUnePersonne(personne);
+            return Ok(this.service.AjouterUnePersonne(personne));
         }
     }
 }

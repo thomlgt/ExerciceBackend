@@ -68,6 +68,6 @@ namespace App.Services
         /// <param name="id"></param>
         /// <param name="voiture"></param>
         /// <returns></returns>
-        public VoitureDTO ModifierVoiture(int id, VoitureDTO voiture);
+        public VoitureDTO ModifierVoiture(VoitureDTO voiture);
     }
 }
