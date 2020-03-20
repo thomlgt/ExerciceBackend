@@ -21,8 +21,8 @@ namespace App.Services.Impl
         public VoitureDTO AjouterUneVoiture(VoitureDTO voiture)
         {
             VoitureDTO result = null;
-            voiture.Proprietaire = this.personneRepository.FindById(voiture.Proprietaire.Id);
-            if(voiture.Proprietaire.Age >= 18)
+            voiture.Personne = this.personneRepository.FindById(voiture.PersonneId);
+            if(voiture.Personne.Age >= 18)
             {
                 result = this.repository.Save(voiture);
             }

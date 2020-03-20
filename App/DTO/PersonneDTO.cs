@@ -32,12 +32,22 @@ namespace App.DTO
         /// <param name="p"></param>
         public static implicit operator Personne(PersonneDTO p)
         {
+            ICollection<Voiture> voitures = new List<Voiture>();
+
+            if(p.Voiture != null)
+            {
+                foreach (Voiture v in p.Voiture)
+                {
+                    voitures.Add(v);
+                }
+            }
+            
             return new Personne(
                 p.Id,
                 p.Nom,
                 p.Prenom,
                 p.Age,
-                p.Voiture
+                voitures
                 );
         }
     }

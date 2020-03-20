@@ -50,7 +50,7 @@ namespace App.Repositories.Impl
 
         public IEnumerable<Voiture> FindByProprietaireId(int id)
         {
-            return voitures.Where(v => v.Proprietaire.Id == id);
+            return voitures.Where(v => v.PersonneId == id);
         }
 
         public Voiture Save(Voiture voiture)

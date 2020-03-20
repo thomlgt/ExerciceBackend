@@ -1,4 +1,5 @@
 ﻿using App.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,63 +9,86 @@ namespace App.Repositories.Impl
 {
     public class PersonneRepository : IPersonneRepository
     {
-        private static List<Personne> personnes = new List<Personne>();
+        private appContext context;
+
+        public PersonneRepository(appContext context)
+        {
+            this.context = context;
+        }
 
         public void Delete(int id)
         {
-            personnes[id] = null;
+            Personne personne = context.Personne.Find(id);
+            context.Personne.Remove(personne);
         }
 
         public IEnumerable<Personne> FindAll()
         {
-            List<Personne> result = new List<Personne>();
-            foreach (var personne in personnes)
-            {
-                if (personne != null)
-                {
-                    result.Add(personne);
-                }
-            }
-            return result;
+            return context.Personne;
         }
 
         public IEnumerable<Personne> FindByAge(int age)
         {
-            return personnes.Where(p => p.Age == age);
+            return context.Personne.Where(p => p.Age == age);
         }
 
         public IEnumerable<Personne> FindByAge(int min, int max)
         {
-            return personnes.Where(p => p.Age >= min && p.Age <= max);
+            return context.Personne.Where(p => p.Age >= min && p.Age <= max);
         }
 
         public Personne FindById(int id)
         {
-            return personnes[id];
+            return context.Personne.Find(id);
         }
 
         public IEnumerable<Personne> FindByNom(string nom)
         {
-            return personnes.Where(p => p.Nom == nom);
+            return context.Personne.Where(p => p.Nom == nom);
         }
 
         public IEnumerable<Personne> FindByPrenom(string prenom)
         {
-            return personnes.Where(p => p.Prenom == prenom);
+            return context.Personne.Where(p => p.Prenom == prenom);
         }
 
         public Personne Save(Personne personne)
         {
-            personne.Id = personnes.Count();
-            personnes.Add(personne);
+            context.Personne.Add(personne);
+            context.SaveChanges();
             return personne;
         }
 
         public Personne Update(int id, Personne personne)
         {
             personne.Id = id;
-            personnes[id] = personne;
+            context.Entry(personne).State = EntityState.Modified;
             return personne;
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

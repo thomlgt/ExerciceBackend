@@ -29,12 +29,22 @@ namespace App.Models
 
         public static implicit operator PersonneDTO(Personne p)
         {
+            ICollection<VoitureDTO> voitures= new List<VoitureDTO>();
+
+            if (p.Voiture != null)
+            {
+                foreach (VoitureDTO v in p.Voiture)
+                {
+                    voitures.Add(v);
+                }
+            }
+
             return new PersonneDTO(
                 p.Id,
                 p.Nom,
                 p.Prenom,
                 p.Age,
-                p.Voiture
+                voitures
                 );
         }
     }
