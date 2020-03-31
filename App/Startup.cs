@@ -32,7 +32,7 @@ namespace App
             services.AddTransient<IPersonneRepository, PersonneRepository>();
             services.AddTransient<IVoitureRepository, VoitureRepository>();
             services.AddSingleton<IVoitureService, VoitureService>();
-            services.AddTransient<appContext, appContext>();
+            services.AddDbContext<appContext>();
             services.AddControllers();
         }
 

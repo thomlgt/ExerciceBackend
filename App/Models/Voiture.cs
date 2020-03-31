@@ -25,6 +25,10 @@ namespace App.Models
             Personne = personne;
         }
 
+        /// <summary>
+        /// Fonction qui transforme une Voiture(Models) en Voiture(DTO) automatiquement
+        /// </summary>
+        /// <param name="v"></param>
         public static implicit operator VoitureDTO(Voiture v)
         {
             return new VoitureDTO(
